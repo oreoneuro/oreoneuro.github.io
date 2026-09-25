@@ -141,13 +141,22 @@ body {
 }
 
 .poke:hover {
-  transform: scale(1.06);
+  background:
+    radial-gradient(
+      circle at center,
+      #3a3210 0%,
+      #171305 45%,
+      #080808 100%
+    );
 
-  border-color: #d0d0d0;
+  transform: scale(1.06);
+  border-color: #ffd84d;
 
   box-shadow:
-    0 0 18px rgba(255, 255, 255, 0.25),
-    inset 0 0 18px rgba(255, 255, 255, 0.05);
+    0 0 6px #ffd84d,
+    0 0 14px rgba(255, 216, 77, 0.8),
+    0 0 28px rgba(255, 216, 77, 0.45),
+    inset 0 0 12px rgba(255, 216, 77, 0.18);
 }
 
 .poke:active {
