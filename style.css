@@ -3339,3 +3339,363 @@ span.omission {
   border-left:
     3px solid #8b0029;
 }
+
+/* =========================================
+   RESEARCH STORY
+   ========================================= */
+
+.research-story {
+  display: grid;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.story-step {
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  gap: 14px;
+  align-items: start;
+
+  padding: 16px 0;
+}
+
+.story-number {
+  width: 36px;
+  height: 36px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+
+  background: #222;
+  color: white;
+
+  font-family: var(--mono);
+  font-size: 0.72rem;
+}
+
+.story-step h3 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 1.35rem;
+
+  margin-bottom: 7px;
+}
+
+.story-step p {
+  margin: 0;
+}
+
+.story-arrow {
+  margin-left: 17px;
+
+  color: #aaa;
+
+  font-size: 1.1rem;
+}
+
+.story-step.future {
+  padding: 18px 14px;
+
+  background:
+    rgba(
+      255,
+      216,
+      77,
+      0.13
+    );
+
+  border-radius: 10px;
+}
+
+.story-step.future
+.story-number {
+  background: var(--yellow);
+  color: #222;
+}
+
+
+/* =========================================
+   BUILD SECTION
+   ========================================= */
+
+.build-flow {
+
+  display: flex;
+  flex-wrap: wrap;
+
+  align-items: center;
+
+  gap: 7px;
+
+  margin: 28px 0;
+}
+
+.build-flow span {
+
+  padding: 7px 10px;
+
+  border-radius: 7px;
+
+  border:
+    1px solid
+    rgba(
+      0,
+      0,
+      0,
+      0.18
+    );
+
+  background:
+    rgba(
+      255,
+      216,
+      77,
+      0.15
+    );
+
+  font-size: 0.78rem;
+
+  font-weight: 600;
+}
+
+.build-flow i {
+  color: #999;
+  font-style: normal;
+}
+
+
+.build-buttons {
+
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 10px;
+
+  margin-top: 25px;
+}
+
+
+.panel-button {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  min-height: 44px;
+
+  padding: 10px 16px;
+
+  border-radius: 7px;
+
+  border: 1px solid #222;
+
+  background: #222;
+
+  color: white;
+
+  text-decoration: none;
+
+  cursor: pointer;
+
+  font-weight: 600;
+}
+
+
+.panel-button:hover {
+
+  transform:
+    translateY(-1px);
+}
+
+
+.panel-button.secondary {
+
+  background: transparent;
+
+  color: #222;
+}
+
+
+/* =========================================
+   RIG GALLERY
+   ========================================= */
+
+.rig-modal {
+
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 200;
+
+  display: none;
+
+  overflow-y: auto;
+
+  background:
+    rgba(
+      12,
+      12,
+      12,
+      0.97
+    );
+
+  color: white;
+}
+
+
+.rig-modal.active {
+
+  display: block;
+}
+
+
+.rig-gallery {
+
+  width:
+    min(
+      960px,
+      92vw
+    );
+
+  margin:
+    0 auto;
+
+  padding:
+    70px
+    0
+    90px;
+
+  position: relative;
+}
+
+
+.rig-close {
+
+  position: fixed;
+
+  right: 24px;
+
+  top: 18px;
+
+  border: none;
+
+  background: transparent;
+
+  color: white;
+
+  font-size: 2.2rem;
+
+  cursor: pointer;
+
+  z-index: 210;
+}
+
+
+.rig-gallery h2 {
+
+  font-family:
+    var(--serif);
+
+  font-weight: 400;
+
+  font-size:
+    clamp(
+      2.5rem,
+      6vw,
+      4rem
+    );
+
+  margin-bottom:
+    12px;
+}
+
+
+.rig-intro {
+
+  max-width: 600px;
+
+  color: #aaa;
+
+  line-height: 1.6;
+
+  margin-bottom:
+    36px;
+}
+
+
+.rig-photo-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(0, 1fr)
+    );
+
+  gap: 22px;
+}
+
+
+.rig-photo-grid figure {
+
+  margin: 0;
+}
+
+
+.rig-photo-grid img {
+
+  display: block;
+
+  width: 100%;
+
+  aspect-ratio: 4 / 3;
+
+  object-fit: cover;
+
+  border-radius: 10px;
+
+  background: #222;
+}
+
+
+.rig-photo-grid figcaption {
+
+  margin-top: 9px;
+
+  font-size: 0.78rem;
+
+  color: #999;
+}
+
+
+.sfn-note {
+
+  margin-top: 28px;
+
+  padding-left: 14px;
+
+  border-left:
+    3px solid
+    var(--yellow);
+
+  font-size: 0.88rem;
+}
+
+
+@media (max-width: 700px) {
+
+  .rig-photo-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .build-buttons {
+    display: grid;
+  }
+
+}
