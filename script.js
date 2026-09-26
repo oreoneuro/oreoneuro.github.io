@@ -1,300 +1,453 @@
-const panel = document.getElementById("infoPanel");
-const overlay = document.getElementById("overlay");
-const closeButton = document.getElementById("closeButton");
-const panelContent = document.getElementById("panelContent");
-const rewardPort = document.getElementById("rewardPort");
+/* =========================================
+   BASIC DOM
+   ========================================= */
+
+const panel =
+  document.getElementById(
+    "infoPanel"
+  );
+
+const overlay =
+  document.getElementById(
+    "overlay"
+  );
+
+const closeButton =
+  document.getElementById(
+    "closeButton"
+  );
+
+const panelContent =
+  document.getElementById(
+    "panelContent"
+  );
+
+const communityPort =
+  document.getElementById(
+    "communityPort"
+  );
+
+
+const gameModal =
+  document.getElementById(
+    "gameModal"
+  );
+
+const gameClose =
+  document.getElementById(
+    "gameClose"
+  );
+
+
+
+/* =========================================
+   PORTFOLIO CONTENT
+   ========================================= */
 
 const sections = {
 
-  play: `
-    <p class="panel-kicker">PLAY</p>
-
-    <h2>Can you wait for the light?</h2>
-
-    <p>
-      Try a short behavioral task inspired by the 5-choice serial reaction time task.
-    </p>
-
-    <p>
-      Wait for the stimulus, respond when it appears,
-      and see how your response profile compares with other SfN visitors.
-    </p>
-
-    <button class="panel-button" onclick="startGame()">
-      Start the task
-    </button>
-  `,
-
   question: `
-    <p class="panel-kicker">THE QUESTION</p>
+
+    <p class="panel-kicker">
+      THE QUESTION
+    </p>
 
     <h2>
-      Why do individuals diverge in their vulnerability to addiction?
+      Why do individuals diverge
+      in their vulnerability to addiction?
     </h2>
 
     <p>
-      Individuals exposed to similar experiences can follow very different behavioral trajectories.
+      Individuals exposed to similar experiences
+      can follow very different behavioral trajectories.
     </p>
 
     <p>
-      I am interested in understanding where those differences come from,
-      and whether vulnerability can be detected before compulsive behavior emerges.
+      I want to understand where those differences
+      come from — and whether vulnerability can be
+      identified before compulsive behavior emerges.
     </p>
 
     <div class="mini-grid">
 
       <div>
-        <strong>Decision-making</strong>
-        <p>How do individuals value rewards and update behavior?</p>
+
+        <strong>
+          Decision-making
+        </strong>
+
+        <p>
+          How do individuals value rewards
+          and update behavior?
+        </p>
+
       </div>
 
-      <div>
-        <strong>Neural circuits</strong>
-        <p>Which circuit states promote resilient or maladaptive trajectories?</p>
-      </div>
 
       <div>
-        <strong>Molecular & epigenetic states</strong>
-        <p>Can biological differences predict vulnerability?</p>
+
+        <strong>
+          Neural circuits
+        </strong>
+
+        <p>
+          Which circuit states promote
+          resilient or maladaptive trajectories?
+        </p>
+
+      </div>
+
+
+      <div>
+
+        <strong>
+          Molecular & epigenetic states
+        </strong>
+
+        <p>
+          Can biological differences
+          predict vulnerability?
+        </p>
+
       </div>
 
     </div>
   `,
 
-  research: `
-    <p class="panel-kicker">CURRENT RESEARCH</p>
 
-    <h2>What I work on</h2>
+  research: `
+
+    <p class="panel-kicker">
+      CURRENT RESEARCH
+    </p>
+
+    <h2>
+      What I work on
+    </h2>
+
 
     <div class="project-card">
-      <h3>SNc → DMS dopamine & impulsivity</h3>
+
+      <h3>
+        SNc → DMS dopamine & impulsivity
+      </h3>
+
       <p>
-        Studying how projection-specific dopaminergic signaling contributes
+        Studying how projection-specific
+        dopaminergic signaling contributes
         to distinct dimensions of impulsive behavior.
       </p>
 
       <div class="tags">
+
         <span>Dopamine</span>
-        <span>Fiber photometry</span>
+
+        <span>
+          Fiber photometry
+        </span>
+
         <span>DREADDs</span>
+
         <span>5-CSRTT</span>
+
       </div>
+
     </div>
 
+
     <div class="project-card">
-      <h3>pyControl behavioral platforms</h3>
+
+      <h3>
+        pyControl behavioral platforms
+      </h3>
+
       <p>
-        Building and adapting behavioral tasks for studying
-        action impulsivity, response inhibition, and decision-making.
+        Building and adapting behavioral tasks
+        for studying action impulsivity,
+        response inhibition and decision-making.
       </p>
 
       <div class="tags">
+
         <span>pyControl</span>
+
         <span>Python</span>
+
         <span>5-CSRTT</span>
-        <span>Go/No-go</span>
+
+        <span>Go / No-go</span>
+
       </div>
+
     </div>
 
+
     <div class="project-card">
-      <h3>Epigenomic exploration</h3>
+
+      <h3>
+        Epigenomic exploration
+      </h3>
+
       <p>
-        Beginning to explore publicly available ATAC-seq datasets
-        to study biological variability related to vulnerability.
+        Exploring publicly available ATAC-seq
+        datasets as a way to think about
+        biological variability and vulnerability.
       </p>
 
       <div class="tags">
+
         <span>ATAC-seq</span>
+
         <span>Epigenomics</span>
-        <span>Public datasets</span>
+
+        <span>
+          Public datasets
+        </span>
+
       </div>
+
     </div>
   `,
 
+
   next: `
-    <p class="panel-kicker">WHERE I'M GOING</p>
+
+    <p class="panel-kicker">
+      WHERE I'M GOING
+    </p>
 
     <h2>
-      From behavioral differences to biological vulnerability
+      From behavioral differences
+      to biological vulnerability
     </h2>
 
     <p>
-      My current work began with a question about heterogeneity within impulsive behavior.
+      My research began with heterogeneity
+      within impulsive behavior.
     </p>
 
     <p>
-      I now want to extend that question across individuals:
-      why do some subjects remain flexible while others progress toward
-      persistent and compulsive behavior?
+      I now want to extend that question
+      across individuals:
+      why do some remain behaviorally flexible
+      while others progress toward persistent
+      and compulsive behavior?
     </p>
 
     <p class="big-question">
-      Can we identify vulnerability before the transition happens?
+      Can vulnerability be identified
+      before the transition happens?
     </p>
 
     <p>
-      I am especially interested in approaching this through
-      decision-making, circuit dynamics, and molecular or epigenetic mechanisms.
+      I am especially interested in approaching
+      that question through decision-making,
+      neural circuits and molecular or epigenetic mechanisms.
     </p>
   `,
 
-  connect: `
-    <p class="panel-kicker">CONNECT</p>
 
-    <h2>Let’s talk at SfN.</h2>
+  connect: `
+
+    <p class="panel-kicker">
+      CONNECT
+    </p>
+
+    <h2>
+      Let's talk at SfN.
+    </h2>
 
     <p>
-      I’m Soyeon Lee, a neuroscience researcher at Korea University
-      preparing for PhD applications for Fall 2027.
+      I'm Soyeon Lee,
+      a neuroscience researcher at Korea University
+      exploring PhD opportunities for Fall 2027.
     </p>
 
     <div class="link-stack">
 
-      <a href="#" target="_blank">CV</a>
+      <a
+        href="#"
+        target="_blank"
+      >
+        CV
+      </a>
 
-      <a href="https://github.com/oreoneuro" target="_blank">
+      <a
+        href="https://github.com/oreoneuro"
+        target="_blank"
+      >
         GitHub
       </a>
 
-      <a href="mailto:soyeonia21@korea.ac.kr">
+      <a
+        href="mailto:soyeonia21@korea.ac.kr"
+      >
         Email
       </a>
 
-      <a href="#" target="_blank">
+      <a
+        href="#"
+        target="_blank"
+      >
         LinkedIn
       </a>
 
     </div>
 
-    <p class="poster-note">
+    <p style="
+      margin-top:24px;
+      font-size:0.85rem;
+      opacity:0.6;
+    ">
       SfN poster details coming soon.
     </p>
   `
+
 };
 
 
-function openPanel(sectionName) {
-  panelContent.innerHTML = sections[sectionName];
-  panel.classList.add("active");
-  overlay.classList.add("active");
+
+/* =========================================
+   SIDE PANEL
+   ========================================= */
+
+function openPanel(
+  sectionName
+) {
+
+  panelContent.innerHTML =
+    sections[
+      sectionName
+    ];
+
+  panel.classList.add(
+    "active"
+  );
+
+  overlay.classList.add(
+    "active"
+  );
 }
+
 
 
 function closePanel() {
-  panel.classList.remove("active");
-  overlay.classList.remove("active");
+
+  panel.classList.remove(
+    "active"
+  );
+
+  overlay.classList.remove(
+    "active"
+  );
 }
 
 
-document.querySelectorAll(".poke").forEach((poke) => {
-  poke.addEventListener("click", () => {
-    const section = poke.dataset.section;
-    openPanel(section);
-  });
-});
+
+document
+  .querySelectorAll(
+    ".portfolio-poke"
+  )
+  .forEach(
+    poke => {
+
+      poke.addEventListener(
+        "click",
+        () => {
+
+          const section =
+            poke.dataset.section;
 
 
-rewardPort.addEventListener("click", () => {
+          if (
+            section ===
+            "play"
+          ) {
 
-  panelContent.innerHTML = `
-    <p class="panel-kicker">COMMUNITY</p>
+            openGame();
 
-    <h2>Reward collected.</h2>
+          } else {
 
-    <p>
-      Compare your score with other SfN visitors.
-    </p>
+            openPanel(
+              section
+            );
 
-    <div class="leaderboard-preview">
+          }
 
-      <div>
-        <span>#1</span>
-        <strong>Subject 018</strong>
-      </div>
+        }
+      );
 
-      <div>
-        <span>#2</span>
-        <strong>Subject 041</strong>
-      </div>
-
-      <div>
-        <span>#3</span>
-        <strong>Subject 007</strong>
-      </div>
-
-    </div>
-
-    <p>
-      The full leaderboard will appear here once the playable task is connected.
-    </p>
-  `;
-
-  panel.classList.add("active");
-  overlay.classList.add("active");
-});
+    }
+  );
 
 
-closeButton.addEventListener("click", closePanel);
-overlay.addEventListener("click", closePanel);
+closeButton.addEventListener(
+  "click",
+  closePanel
+);
 
 
-function startGame() {
+overlay.addEventListener(
+  "click",
+  closePanel
+);
 
-  panelContent.innerHTML = `
-    <p class="panel-kicker">PLAY</p>
 
-    <h2>Wait for the light.</h2>
 
-    <p class="game-instruction">
-      Start from the food tray. Wait. Then tap the glowing hole.
-    </p>
+/* =========================================
+   COMMUNITY PLACEHOLDER
+   ========================================= */
 
-    <div class="mini-chamber" id="gameChamber">
+communityPort.addEventListener(
+  "click",
+  () => {
 
-      <div class="game-holes">
+    panelContent.innerHTML = `
 
-        <button class="game-hole" data-hole="1">
-          <span class="game-led"></span>
-        </button>
+      <p class="panel-kicker">
+        COMMUNITY
+      </p>
 
-        <button class="game-hole" data-hole="2">
-          <span class="game-led"></span>
-        </button>
+      <h2>
+        SfN leaderboard
+      </h2>
 
-        <button class="game-hole" data-hole="3">
-          <span class="game-led"></span>
-        </button>
+      <p>
+        Player scores will eventually appear here
+        so you can compare your result
+        with other SfN visitors.
+      </p>
 
-        <button class="game-hole" data-hole="4">
-          <span class="game-led"></span>
-        </button>
+      <p>
+        The next step is connecting the site
+        to a shared database so scores from
+        different phones can be ranked together.
+      </p>
 
-        <button class="game-hole" data-hole="5">
-          <span class="game-led"></span>
-        </button>
+    `;
 
-      </div>
+    panel.classList.add(
+      "active"
+    );
 
-      <button class="game-tray" id="gameTray">
-        FOOD TRAY
-      </button>
+    overlay.classList.add(
+      "active"
+    );
 
-    </div>
+  }
+);
 
-    <p class="game-status" id="gameStatus">
-      Tap the food tray to start trial 1.
-    </p>
 
-    <div class="trial-progress" id="trialProgress"></div>
-  `;
 
-  initGame();
-}
+/* =========================================
+   GAME CONFIG
+   ========================================= */
 
-const GAME_CONFIG = {
-  trials: 5,
+const CFG = {
 
-  itiOptions: [
+  n: 5,
+
+  itis: [
     1500,
     2000,
     2500,
@@ -303,92 +456,427 @@ const GAME_CONFIG = {
     4000
   ],
 
-  stimulusDuration: 1000,
+  sd:
+    1000,
 
-  limitedHold: 2000,
+  lh:
+    2000,
 
-  timeout: 2000
+  timeout:
+    2000
 };
 
 
-let gameState = null;
-let gameTimers = [];
+
+/* =========================================
+   BUILD FIVE HOLES
+   ========================================= */
+
+const gWall =
+  document.getElementById(
+    "gWall"
+  );
 
 
-function clearGameTimers() {
+const gChamber =
+  document.getElementById(
+    "gChamber"
+  );
 
-  gameTimers.forEach(clearTimeout);
 
-  gameTimers = [];
+const gMag =
+  document.getElementById(
+    "gMag"
+  );
+
+
+const gStatus =
+  document.getElementById(
+    "gStatus"
+  );
+
+
+const gTicks =
+  document.getElementById(
+    "gTicks"
+  );
+
+
+const gameResults =
+  document.getElementById(
+    "gameResults"
+  );
+
+
+const gHoles = [];
+
+
+function buildGameWall() {
+
+  gWall.innerHTML =
+    "";
+
+  gHoles.length =
+    0;
+
+
+  for (
+    let i = 1;
+    i <= 5;
+    i++
+  ) {
+
+    const wrap =
+      document.createElement(
+        "div"
+      );
+
+    wrap.className =
+      "hole-wrap";
+
+
+    const hole =
+      document.createElement(
+        "button"
+      );
+
+    hole.type =
+      "button";
+
+    hole.className =
+      "hole";
+
+    hole.dataset.hole =
+      i;
+
+
+    const led =
+      document.createElement(
+        "span"
+      );
+
+    led.className =
+      "led";
+
+
+    const number =
+      document.createElement(
+        "span"
+      );
+
+    number.className =
+      "hole-n";
+
+    number.textContent =
+      i;
+
+
+    hole.appendChild(
+      led
+    );
+
+    wrap.appendChild(
+      hole
+    );
+
+    wrap.appendChild(
+      number
+    );
+
+    gWall.appendChild(
+      wrap
+    );
+
+    gHoles.push(
+      hole
+    );
+
+
+    hole.addEventListener(
+      "click",
+      () =>
+        onHole(
+          i
+        )
+    );
+
+  }
+
 }
 
 
-function gameLater(fn, ms) {
+buildGameWall();
 
-  const timer = setTimeout(fn, ms);
 
-  gameTimers.push(timer);
+
+/* =========================================
+   GAME STATE
+   ========================================= */
+
+let T;
+
+let timers = [];
+
+
+function later(
+  fn,
+  ms
+) {
+
+  const id =
+    setTimeout(
+      fn,
+      ms
+    );
+
+  timers.push(
+    id
+  );
 }
 
 
-function initGame() {
 
-  clearGameTimers();
+function clearTimers() {
 
-  gameState = {
+  timers.forEach(
+    clearTimeout
+  );
 
-    phase: "await",
+  timers =
+    [];
+}
 
-    trial: 0,
 
-    trials: [],
 
-    cue: null,
+/* =========================================
+   OPEN / CLOSE GAME
+   ========================================= */
 
-    cueTime: null
+function openGame() {
+
+  closePanel();
+
+  resetTask();
+
+  gameModal.classList.add(
+    "active"
+  );
+
+  gameModal.setAttribute(
+    "aria-hidden",
+    "false"
+  );
+
+  document.body.style.overflow =
+    "hidden";
+}
+
+
+
+function closeGame() {
+
+  clearTimers();
+
+  gameModal.classList.remove(
+    "active"
+  );
+
+  gameModal.setAttribute(
+    "aria-hidden",
+    "true"
+  );
+
+  document.body.style.overflow =
+    "";
+}
+
+
+gameClose.addEventListener(
+  "click",
+  closeGame
+);
+
+
+
+/* =========================================
+   STATUS
+   ========================================= */
+
+function setStatus(
+  message,
+  state = ""
+) {
+
+  gStatus.textContent =
+    message;
+
+  gStatus.className =
+    "game-status " +
+    state;
+}
+
+
+
+/* =========================================
+   TRIAL RASTER
+   ========================================= */
+
+function renderTicks() {
+
+  gTicks.innerHTML =
+    "";
+
+
+  for (
+    let i = 0;
+    i < CFG.n;
+    i++
+  ) {
+
+    const tick =
+      document.createElement(
+        "span"
+      );
+
+    tick.className =
+      "tick";
+
+
+    if (
+      T.trials[i]
+    ) {
+
+      tick.classList.add(
+        T.trials[i]
+          .outcome
+      );
+
+    } else if (
+      i ===
+      T.trial - 1 &&
+      T.phase !==
+      "done"
+    ) {
+
+      tick.classList.add(
+        "current"
+      );
+
+    }
+
+
+    gTicks.appendChild(
+      tick
+    );
+
+  }
+
+}
+
+
+
+/* =========================================
+   RESET
+   ========================================= */
+
+function resetTask() {
+
+  clearTimers();
+
+
+  T = {
+
+    phase:
+      "await",
+
+    trial:
+      0,
+
+    trials:
+      [],
+
+    cue:
+      null,
+
+    cueAt:
+      null
 
   };
 
 
-  document
-    .querySelectorAll(".game-hole")
-    .forEach((hole) => {
+  gHoles.forEach(
+    hole => {
 
-      hole.addEventListener("click", () => {
+      hole.classList.remove(
+        "cue"
+      );
 
-        handleHole(
-          Number(hole.dataset.hole)
-        );
+      hole.classList.remove(
+        "poked"
+      );
 
-      });
-
-    });
-
-
-  document
-    .getElementById("gameTray")
-    .addEventListener(
-      "click",
-      handleTray
-    );
+    }
+  );
 
 
-  updateTrialProgress();
+  gChamber.classList.remove(
+    "house"
+  );
+
+  gChamber.classList.remove(
+    "dark"
+  );
+
+
+  gMag.classList.remove(
+    "has-pellet"
+  );
+
+
+  gMag.classList.add(
+    "ready"
+  );
+
+
+  gameResults.hidden =
+    true;
+
+
+  setStatus(
+    "Tap the food tray to start trial 1."
+  );
+
+
+  renderTicks();
 }
 
-function handleTray() {
+
+
+/* =========================================
+   FOOD TRAY
+   ========================================= */
+
+function onMagazine() {
 
   if (
-    gameState.phase !== "await" &&
-    gameState.phase !== "reward"
+    T.phase !==
+      "await" &&
+    T.phase !==
+      "reward"
   ) {
+
     return;
   }
 
 
+  gMag.classList.remove(
+    "has-pellet"
+  );
+
+
   if (
-    gameState.trial >=
-    GAME_CONFIG.trials
+    T.trial >=
+    CFG.n
   ) {
 
     finishGame();
@@ -397,179 +885,319 @@ function handleTray() {
   }
 
 
-  gameState.trial++;
+  T.trial +=
+    1;
 
-  gameState.phase = "iti";
+
+  T.phase =
+    "iti";
 
 
-  setGameStatus(
+  gMag.classList.remove(
+    "ready"
+  );
+
+
+  gChamber.classList.add(
+    "house"
+  );
+
+
+  setStatus(
     "Wait for the light…"
   );
 
 
-  updateTrialProgress();
+  renderTicks();
 
 
   const iti =
-    GAME_CONFIG.itiOptions[
+
+    CFG.itis[
+
       Math.floor(
         Math.random() *
-        GAME_CONFIG.itiOptions.length
+        CFG.itis.length
       )
+
     ];
 
 
-  gameLater(() => {
+  later(
 
-    showCue();
+    () => {
 
-  }, iti);
+      T.phase =
+        "cue";
+
+
+      T.cue =
+        1 +
+        Math.floor(
+          Math.random() *
+          5
+        );
+
+
+      T.cueAt =
+        performance.now();
+
+
+      const target =
+        gHoles[
+          T.cue - 1
+        ];
+
+
+      target.classList.add(
+        "cue"
+      );
+
+
+      setStatus(
+        "Now! Tap the glowing hole."
+      );
+
+
+      /*
+        cue itself disappears
+        after stimulus duration
+      */
+
+      later(
+
+        () => {
+
+          target
+            .classList
+            .remove(
+              "cue"
+            );
+
+        },
+
+        CFG.sd
+
+      );
+
+
+      /*
+        if no response
+        within limited hold:
+        omission
+      */
+
+      later(
+
+        () => {
+
+          if (
+            T.phase ===
+            "cue"
+          ) {
+
+            recordTrial(
+              "omission"
+            );
+
+
+            timeout(
+              "Missed it."
+            );
+
+          }
+
+        },
+
+        CFG.lh
+
+      );
+
+    },
+
+    iti
+
+  );
+
 }
 
-function showCue() {
 
-  gameState.phase = "cue";
 
-  gameState.cue =
-    Math.floor(Math.random() * 5) + 1;
+gMag.addEventListener(
+  "click",
+  onMagazine
+);
 
-  gameState.cueTime =
-    performance.now();
 
+
+/* =========================================
+   HOLE RESPONSE
+   ========================================= */
+
+function onHole(
+  number
+) {
 
   const hole =
-    document.querySelector(
-      `.game-hole[data-hole="${gameState.cue}"]`
-    );
+    gHoles[
+      number - 1
+    ];
 
 
-  hole.classList.add("cue");
-
-
-  setGameStatus(
-    "Now!"
+  hole.classList.add(
+    "poked"
   );
 
 
-  gameLater(() => {
+  setTimeout(
 
-    hole.classList.remove("cue");
+    () => {
 
-  }, GAME_CONFIG.stimulusDuration);
-
-
-  gameLater(() => {
-
-    if (gameState.phase === "cue") {
-
-      recordTrial(
-        "omission"
+      hole.classList.remove(
+        "poked"
       );
 
-      startTimeout(
-        "Missed it."
-      );
+    },
 
-    }
+    110
 
-  }, GAME_CONFIG.limitedHold);
-}
-
-function handleHole(holeNumber) {
-
-  const hole =
-    document.querySelector(
-      `.game-hole[data-hole="${holeNumber}"]`
-    );
+  );
 
 
-  hole.classList.add("poked");
-
-  setTimeout(() => {
-
-    hole.classList.remove("poked");
-
-  }, 100);
-
-
-  /* Premature response */
+  /*
+    premature:
+    poke during ITI
+  */
 
   if (
-    gameState.phase === "iti"
+    T.phase ===
+    "iti"
   ) {
 
-    clearGameTimers();
+    clearTimers();
+
 
     recordTrial(
       "premature"
     );
 
-    startTimeout(
+
+    timeout(
       "Too early!"
     );
+
 
     return;
   }
 
 
-  /* Response after cue */
+
+  /*
+    response during cue / LH
+  */
 
   if (
-    gameState.phase === "cue"
+    T.phase ===
+    "cue"
   ) {
 
-    clearGameTimers();
+    clearTimers();
 
 
-    document
-      .querySelectorAll(".game-hole")
-      .forEach((h) =>
-        h.classList.remove("cue")
-      );
+    gHoles.forEach(
+      h =>
+        h.classList.remove(
+          "cue"
+        )
+    );
 
 
-    const reactionTime =
+    const latency =
       performance.now() -
-      gameState.cueTime;
+      T.cueAt;
 
+
+    /*
+      correct
+    */
 
     if (
-      holeNumber ===
-      gameState.cue
+      number ===
+      T.cue
     ) {
 
       recordTrial(
         "correct",
-        reactionTime
+        latency
       );
 
 
-      gameState.phase =
+      T.phase =
         "reward";
 
 
-      setGameStatus(
-        `Correct — ${Math.round(
-          reactionTime
-        )} ms. Collect the reward.`,
-        "good"
+      gMag.classList.add(
+        "ready"
       );
 
 
-      document
-        .getElementById("gameTray")
-        .classList.add("reward");
+      /*
+        restart pellet animation
+      */
+
+      gMag.classList.remove(
+        "has-pellet"
+      );
 
 
-    } else {
+      void
+      gMag.offsetWidth;
+
+
+      gMag.classList.add(
+        "has-pellet"
+      );
+
+
+      if (
+        T.trial >=
+        CFG.n
+      ) {
+
+        setStatus(
+          "Correct! Collect your final pellet.",
+          "good"
+        );
+
+      } else {
+
+        setStatus(
+          "Correct — " +
+          Math.round(
+            latency
+          ) +
+          " ms. Collect your pellet.",
+          "good"
+        );
+
+      }
+
+    }
+
+
+    /*
+      incorrect
+    */
+
+    else {
 
       recordTrial(
         "incorrect",
-        reactionTime
+        latency
       );
 
 
-      startTimeout(
+      timeout(
         "Wrong hole."
       );
 
@@ -579,293 +1207,448 @@ function handleHole(holeNumber) {
 
 }
 
+
+
+/* =========================================
+   RECORD TRIAL
+   ========================================= */
+
 function recordTrial(
   outcome,
-  reactionTime = null
+  latency = null
 ) {
 
-  gameState.trials.push({
+  T.trials.push({
 
-    outcome,
+    outcome:
+      outcome,
 
-    reactionTime
+    latency:
+      latency
 
   });
 
 
-  updateTrialProgress();
+  renderTicks();
 }
 
 
-function startTimeout(message) {
 
-  gameState.phase =
+/* =========================================
+   TIMEOUT
+   ========================================= */
+
+function timeout(
+  message
+) {
+
+  T.phase =
     "timeout";
 
 
-  document
-    .getElementById(
-      "gameChamber"
-    )
-    .classList.add("timeout");
+  gChamber.classList.remove(
+    "house"
+  );
 
 
-  setGameStatus(
-    message + " Lights off.",
+  gChamber.classList.add(
+    "dark"
+  );
+
+
+  gMag.classList.remove(
+    "ready"
+  );
+
+
+  setStatus(
+    message +
+    " Lights off.",
     "bad"
   );
 
 
-  gameLater(() => {
+  later(
 
-    document
-      .getElementById(
-        "gameChamber"
-      )
-      .classList.remove(
-        "timeout"
+    () => {
+
+      gChamber.classList.remove(
+        "dark"
       );
 
 
-    if (
-      gameState.trial >=
-      GAME_CONFIG.trials
-    ) {
+      if (
+        T.trial >=
+        CFG.n
+      ) {
 
-      finishGame();
+        finishGame();
 
-      return;
-    }
-
-
-    gameState.phase =
-      "await";
+        return;
+      }
 
 
-    setGameStatus(
-      `Tap the food tray to start trial ${
-        gameState.trial + 1
-      }.`
-    );
+      T.phase =
+        "await";
 
 
-  }, GAME_CONFIG.timeout);
-}
-
-document
-  .getElementById("gameTray")
-  .classList.remove("reward");
-
-function setGameStatus(
-  message,
-  type = ""
-) {
-
-  const status =
-    document.getElementById(
-      "gameStatus"
-    );
+      gMag.classList.add(
+        "ready"
+      );
 
 
-  status.textContent =
-    message;
+      setStatus(
+        "Tap the food tray to start trial " +
+        (
+          T.trial + 1
+        ) +
+        "."
+      );
 
+    },
 
-  status.className =
-    "game-status " +
-    type;
+    CFG.timeout
+
+  );
+
 }
 
 
-function updateTrialProgress() {
 
-  const container =
-    document.getElementById(
-      "trialProgress"
-    );
-
-
-  if (!container) return;
-
-
-  container.innerHTML = "";
-
-
-  for (
-    let i = 0;
-    i < GAME_CONFIG.trials;
-    i++
-  ) {
-
-    const dot =
-      document.createElement(
-        "span"
-      );
-
-
-    if (
-      gameState.trials[i]
-    ) {
-
-      dot.classList.add(
-        gameState.trials[i]
-          .outcome
-      );
-
-    } else if (
-      i === gameState.trial - 1
-    ) {
-
-      dot.classList.add(
-        "current"
-      );
-
-    }
-
-
-    container.appendChild(
-      dot
-    );
-  }
-}
+/* =========================================
+   FINISH
+   ========================================= */
 
 function finishGame() {
 
-  clearGameTimers();
+  clearTimers();
 
-  gameState.phase =
+
+  T.phase =
     "done";
 
 
+  gChamber.classList.remove(
+    "house"
+  );
+
+
+  gChamber.classList.remove(
+    "dark"
+  );
+
+
+  gMag.classList.remove(
+    "ready"
+  );
+
+
   const premature =
-    gameState.trials.filter(
-      t =>
-        t.outcome ===
+
+    T.trials.filter(
+      trial =>
+        trial.outcome ===
         "premature"
     ).length;
 
 
   const correct =
-    gameState.trials.filter(
-      t =>
-        t.outcome ===
+
+    T.trials.filter(
+      trial =>
+        trial.outcome ===
         "correct"
     );
 
 
   const incorrect =
-    gameState.trials.filter(
-      t =>
-        t.outcome ===
+
+    T.trials.filter(
+      trial =>
+        trial.outcome ===
         "incorrect"
     ).length;
 
 
-  const omissions =
-    gameState.trials.filter(
-      t =>
-        t.outcome ===
+  const omission =
+
+    T.trials.filter(
+      trial =>
+        trial.outcome ===
         "omission"
     ).length;
 
 
   const meanRT =
+
     correct.length
-      ? Math.round(
-          correct.reduce(
-            (sum, t) =>
-              sum +
-              t.reactionTime,
-            0
-          ) /
-          correct.length
-        )
-      : null;
+
+      ?
+
+      Math.round(
+
+        correct.reduce(
+
+          (
+            sum,
+            trial
+          ) =>
+
+            sum +
+            trial.latency,
+
+          0
+
+        ) /
+        correct.length
+
+      )
+
+      :
+
+      null;
 
 
-  showGameResult({
+  document
+    .getElementById(
+      "resultPremature"
+    )
+    .textContent =
+      premature;
 
-    premature,
 
-    correct:
-      correct.length,
+  document
+    .getElementById(
+      "resultCorrect"
+    )
+    .textContent =
+      correct.length +
+      "/5";
 
-    incorrect,
 
-    omissions,
+  document
+    .getElementById(
+      "resultRT"
+    )
+    .textContent =
 
-    reactionTime:
-      meanRT
+      meanRT !==
+      null
+
+        ?
+
+        meanRT +
+        " ms"
+
+        :
+
+        "—";
+
+
+  let copy =
+    "";
+
+
+  if (
+    premature === 0
+  ) {
+
+    copy +=
+      "You waited for every cue. ";
+
+  } else if (
+    premature === 1
+  ) {
+
+    copy +=
+      "You jumped the gun once. ";
+
+  } else {
+
+    copy +=
+      "You responded before the cue " +
+      premature +
+      " times. ";
+
+  }
+
+
+  if (
+    correct.length ===
+    CFG.n
+  ) {
+
+    copy +=
+      "You also detected every target.";
+
+  } else {
+
+    copy +=
+      "You made " +
+      incorrect +
+      " incorrect response(s) and " +
+      omission +
+      " omission(s).";
+
+  }
+
+
+  document
+    .getElementById(
+      "resultCopy"
+    )
+    .textContent =
+      copy;
+
+
+  gameResults.hidden =
+    false;
+
+
+  setStatus(
+    "Done — here is your result.",
+    "good"
+  );
+
+
+  gameResults.scrollIntoView({
+
+    behavior:
+      "smooth",
+
+    block:
+      "start"
 
   });
+
 }
 
-function showGameResult(result) {
-
-  panelContent.innerHTML = `
-
-    <p class="panel-kicker">
-      YOUR RESULT
-    </p>
-
-    <h2>
-      Subject complete.
-    </h2>
-
-    <div class="result-grid">
-
-      <div>
-        <strong>
-          ${result.premature}
-        </strong>
-
-        <span>
-          PREMATURE
-        </span>
-      </div>
 
 
-      <div>
-        <strong>
-          ${result.correct}/5
-        </strong>
+/* =========================================
+   RESULT BUTTONS
+   ========================================= */
 
-        <span>
-          CORRECT
-        </span>
-      </div>
+document
+  .getElementById(
+    "playAgain"
+  )
+  .addEventListener(
 
+    "click",
 
-      <div>
-        <strong>
-          ${
-            result.reactionTime
-            ? result.reactionTime +
-              " ms"
-            : "—"
-          }
-        </strong>
+    () => {
 
-        <span>
-          MEAN RT
-        </span>
-      </div>
-
-    </div>
+      resetTask();
 
 
-    <p class="result-note">
-      Your rank among SfN players
-      will appear here.
-    </p>
+      gChamber.scrollIntoView({
+
+        behavior:
+          "smooth",
+
+        block:
+          "center"
+
+      });
+
+    }
+
+  );
 
 
-    <button
-      class="panel-button"
-      onclick="startGame()"
-    >
-      Play again
-    </button>
+document
+  .getElementById(
+    "seeCommunity"
+  )
+  .addEventListener(
 
-  `;
-}
+    "click",
+
+    () => {
+
+      closeGame();
+
+
+      panelContent.innerHTML = `
+
+        <p class="panel-kicker">
+          COMMUNITY
+        </p>
+
+        <h2>
+          SfN leaderboard
+        </h2>
+
+        <p>
+          This is where your live rank
+          and the SfN player directory
+          will eventually appear.
+        </p>
+
+        <p>
+          For now the game runs locally.
+          The next step is connecting
+          the results to a shared database.
+        </p>
+
+      `;
+
+
+      panel.classList.add(
+        "active"
+      );
+
+
+      overlay.classList.add(
+        "active"
+      );
+
+    }
+
+  );
+
+
+
+/* =========================================
+   ESC KEY
+   ========================================= */
+
+document.addEventListener(
+
+  "keydown",
+
+  event => {
+
+    if (
+      event.key ===
+      "Escape"
+    ) {
+
+      if (
+        gameModal
+          .classList
+          .contains(
+            "active"
+          )
+      ) {
+
+        closeGame();
+
+      } else {
+
+        closePanel();
+
+      }
+
+    }
+
+  }
+
+);
+
+
+
+/* initial state */
+
+resetTask();
