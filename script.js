@@ -46,265 +46,343 @@ const gameClose =
 
 const sections = {
 
-  question: `
+question: `
 
-    <p class="panel-kicker">
-      THE QUESTION
-    </p>
+  <p class="panel-kicker">
+    THE QUESTION
+  </p>
 
-    <h2>
-      Why do individuals diverge
-      in their vulnerability to addiction?
-    </h2>
+  <h2>
+    Why do similar individuals
+    end up behaving so differently?
+  </h2>
 
-    <p>
-      Individuals exposed to similar experiences
-      can follow very different behavioral trajectories.
-    </p>
+  <p>
+    I am interested in the variability that is easy to average away.
+  </p>
 
-    <p>
-      I want to understand where those differences
-      come from — and whether vulnerability can be
-      identified before compulsive behavior emerges.
-    </p>
+  <p>
+    When individuals experience similar environments or manipulations
+    but follow different behavioral trajectories,
+    I want to know whether that difference is simply noise —
+    or the beginning of the biological question.
+  </p>
 
-    <div class="mini-grid">
+  <p class="big-question">
+    Why do some individuals become vulnerable to compulsive behavior,
+    while others remain flexible?
+  </p>
 
-      <div>
+  <p>
+    I want to approach this question across three levels.
+  </p>
 
-        <strong>
-          Decision-making
-        </strong>
+  <div class="mini-grid">
 
-        <p>
-          How do individuals value rewards
-          and update behavior?
-        </p>
-
-      </div>
-
-
-      <div>
-
-        <strong>
-          Neural circuits
-        </strong>
-
-        <p>
-          Which circuit states promote
-          resilient or maladaptive trajectories?
-        </p>
-
-      </div>
-
-
-      <div>
-
-        <strong>
-          Molecular & epigenetic states
-        </strong>
-
-        <p>
-          Can biological differences
-          predict vulnerability?
-        </p>
-
-      </div>
-
-    </div>
-  `,
-
-
-  research: `
-
-    <p class="panel-kicker">
-      CURRENT RESEARCH
-    </p>
-
-    <h2>
-      What I work on
-    </h2>
-
-
-    <div class="project-card">
-
-      <h3>
-        SNc → DMS dopamine & impulsivity
-      </h3>
+    <div>
+      <strong>
+        Decision-making
+      </strong>
 
       <p>
-        Studying how projection-specific
-        dopaminergic signaling contributes
-        to distinct dimensions of impulsive behavior.
+        How do individuals value rewards,
+        learn from consequences,
+        and update their behavior?
       </p>
-
-      <div class="tags">
-
-        <span>Dopamine</span>
-
-        <span>
-          Fiber photometry
-        </span>
-
-        <span>DREADDs</span>
-
-        <span>5-CSRTT</span>
-
-      </div>
-
     </div>
 
-
-    <div class="project-card">
-
-      <h3>
-        pyControl behavioral platforms
-      </h3>
+    <div>
+      <strong>
+        Neural circuits
+      </strong>
 
       <p>
-        Building and adapting behavioral tasks
-        for studying action impulsivity,
-        response inhibition and decision-making.
+        Which circuit states bias individuals
+        toward resilient or maladaptive trajectories?
       </p>
-
-      <div class="tags">
-
-        <span>pyControl</span>
-
-        <span>Python</span>
-
-        <span>5-CSRTT</span>
-
-        <span>Go / No-go</span>
-
-      </div>
-
     </div>
 
-
-    <div class="project-card">
-
-      <h3>
-        Epigenomic exploration
-      </h3>
+    <div>
+      <strong>
+        Molecular & epigenetic states
+      </strong>
 
       <p>
-        Exploring publicly available ATAC-seq
-        datasets as a way to think about
-        biological variability and vulnerability.
+        Can biological differences reveal vulnerability
+        before compulsive behavior emerges?
       </p>
+    </div>
 
-      <div class="tags">
+  </div>
 
-        <span>ATAC-seq</span>
+`,
 
-        <span>Epigenomics</span>
+ research: `
 
-        <span>
-          Public datasets
-        </span>
+  <p class="panel-kicker">
+    RESEARCH
+  </p>
 
+  <h2>
+    One question kept leading to another.
+  </h2>
+
+  <div class="research-story">
+
+    <div class="story-step">
+
+      <span class="story-number">
+        01
+      </span>
+
+      <div>
+        <h3>
+          Is impulsivity one thing?
+        </h3>
+
+        <p>
+          My current work began by asking whether distinct forms
+          of impulsivity share the same neural mechanism.
+        </p>
       </div>
 
     </div>
-  `,
 
 
-  next: `
-
-    <p class="panel-kicker">
-      WHERE I'M GOING
-    </p>
-
-    <h2>
-      From behavioral differences
-      to biological vulnerability
-    </h2>
-
-    <p>
-      My research began with heterogeneity
-      within impulsive behavior.
-    </p>
-
-    <p>
-      I now want to extend that question
-      across individuals:
-      why do some remain behaviorally flexible
-      while others progress toward persistent
-      and compulsive behavior?
-    </p>
-
-    <p class="big-question">
-      Can vulnerability be identified
-      before the transition happens?
-    </p>
-
-    <p>
-      I am especially interested in approaching
-      that question through decision-making,
-      neural circuits and molecular or epigenetic mechanisms.
-    </p>
-  `,
+    <div class="story-arrow">
+      ↓
+    </div>
 
 
-  connect: `
+    <div class="story-step">
 
-    <p class="panel-kicker">
-      CONNECT
-    </p>
+      <span class="story-number">
+        02
+      </span>
 
-    <h2>
-      Let's talk at SfN.
-    </h2>
+      <div>
+        <h3>
+          What does dopamine contribute?
+        </h3>
 
-    <p>
-      I'm Soyeon Lee,
-      a neuroscience researcher at Korea University
-      exploring PhD opportunities for Fall 2027.
-    </p>
+        <p>
+          I study how the SNc→DMS dopaminergic projection
+          contributes to impulsive behavior using circuit manipulation,
+          behavioral phenotyping and fiber photometry.
+        </p>
 
-    <div class="link-stack">
-
-      <a
-        href="#"
-        target="_blank"
-      >
-        CV
-      </a>
-
-      <a
-        href="https://github.com/oreoneuro"
-        target="_blank"
-      >
-        GitHub
-      </a>
-
-      <a
-        href="mailto:soyeonia21@korea.ac.kr"
-      >
-        Email
-      </a>
-
-      <a
-        href="#"
-        target="_blank"
-      >
-        LinkedIn
-      </a>
+        <div class="tags">
+          <span>SNc → DMS</span>
+          <span>Dopamine</span>
+          <span>DREADDs</span>
+          <span>Fiber photometry</span>
+        </div>
+      </div>
 
     </div>
 
-    <p style="
-      margin-top:24px;
-      font-size:0.85rem;
-      opacity:0.6;
-    ">
-      SfN poster details coming soon.
-    </p>
-  `
 
-};
+    <div class="story-arrow">
+      ↓
+    </div>
 
+
+    <div class="story-step">
+
+      <span class="story-number">
+        03
+      </span>
+
+      <div>
+        <h3>
+          Why do individuals diverge?
+        </h3>
+
+        <p>
+          Studying different dimensions of impulsivity made me increasingly
+          interested in heterogeneity itself:
+          why similar subjects can follow very different behavioral trajectories.
+        </p>
+      </div>
+
+    </div>
+
+
+    <div class="story-arrow">
+      ↓
+    </div>
+
+
+    <div class="story-step future">
+
+      <span class="story-number">
+        ?
+      </span>
+
+      <div>
+        <h3>
+          Can we detect vulnerability before compulsion emerges?
+        </h3>
+
+        <p>
+          This is the question I hope to pursue in addiction research —
+          connecting behavior and decision-making with circuit dynamics
+          and molecular or epigenetic states.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+`,
+ build: `
+
+  <p class="panel-kicker">
+    HOW I WORK
+  </p>
+
+  <h2>
+    If the tool I need doesn't exist,
+    I like building it.
+  </h2>
+
+  <p>
+    When my lab needed a way to measure action impulsivity,
+    I built a pyControl-based 5-CSRTT platform from open-source hardware.
+  </p>
+
+  <p>
+    That meant assembling the system,
+    soldering and troubleshooting electronics,
+    implementing the behavioral task,
+    debugging training stages,
+    and building the Python analysis pipeline.
+  </p>
+
+  <p>
+    The platform is now used for 5-CSRTT experiments across the lab,
+    and I am extending it with a Go/No-go task
+    to study response inhibition and decision-making.
+  </p>
+
+
+  <div class="build-flow">
+
+    <span>
+      Question
+    </span>
+
+    <i>→</i>
+
+    <span>
+      Build
+    </span>
+
+    <i>→</i>
+
+    <span>
+      Debug
+    </span>
+
+    <i>→</i>
+
+    <span>
+      Measure
+    </span>
+
+    <i>→</i>
+
+    <span>
+      Ask again
+    </span>
+
+  </div>
+
+
+  <div class="build-buttons">
+
+    <button
+      class="panel-button"
+      id="seeRigButton"
+      type="button"
+    >
+      See the rig
+    </button>
+
+    <a
+      class="panel-button secondary"
+      href="https://github.com/oreoneuro"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      View code on GitHub
+    </a>
+
+  </div>
+
+`,
+
+ connect: `
+
+  <p class="panel-kicker">
+    CONNECT
+  </p>
+
+  <h2>
+    Let's continue the conversation.
+  </h2>
+
+  <p>
+    I'm Soyeon Lee, an M.S. researcher at Korea University
+    interested in individual differences in addiction vulnerability.
+  </p>
+
+  <p>
+    I am exploring neuroscience PhD opportunities for Fall 2027
+    and would especially love to talk about
+    decision-making, addiction circuits,
+    behavioral variability, or epigenetic vulnerability.
+  </p>
+
+  <div class="link-stack">
+
+    <a
+      href="assets/Soyeon_Lee_CV.pdf"
+      target="_blank"
+    >
+      Curriculum Vitae ↗
+    </a>
+
+    <a
+      href="https://github.com/oreoneuro"
+      target="_blank"
+    >
+      GitHub ↗
+    </a>
+
+    <a
+      href="mailto:soyeonia21@korea.ac.kr"
+    >
+      Email ↗
+    </a>
+
+    <a
+      href="#"
+      target="_blank"
+    >
+      LinkedIn ↗
+    </a>
+
+  </div>
+
+
+  <p class="sfn-note">
+    At SfN 2026?<br>
+    Find me at Poster [session / board].
+  </p>
+
+`,
 
 
 /* =========================================
@@ -696,6 +774,78 @@ gameClose.addEventListener(
   closeGame
 );
 
+const rigModal =
+  document.getElementById(
+    "rigModal"
+  );
+
+const rigClose =
+  document.getElementById(
+    "rigClose"
+  );
+
+function openRigGallery() {
+
+  rigModal.classList.add(
+    "active"
+  );
+
+  rigModal.setAttribute(
+    "aria-hidden",
+    "false"
+  );
+
+  document.body.style.overflow =
+    "hidden";
+}
+
+
+function closeRigGallery() {
+
+  rigModal.classList.remove(
+    "active"
+  );
+
+  rigModal.setAttribute(
+    "aria-hidden",
+    "true"
+  );
+
+  document.body.style.overflow =
+    "";
+}
+
+panelContent.addEventListener(
+  "click",
+  event => {
+
+    if (
+      event.target.id ===
+      "seeRigButton"
+    ) {
+
+      openRigGallery();
+
+    }
+
+  }
+);
+
+rigClose.addEventListener(
+  "click",
+  closeRigGallery
+);
+
+if (
+  rigModal.classList.contains(
+    "active"
+  )
+) {
+
+  closeRigGallery();
+
+  return;
+}
 
 
 /* =========================================
