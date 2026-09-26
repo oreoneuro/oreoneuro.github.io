@@ -502,3 +502,307 @@ body {
 }
   
 }
+
+/* =========================
+   MINI 5-CSRTT GAME
+   ========================= */
+
+.mini-chamber {
+  position: relative;
+
+  margin-top: 24px;
+
+  padding: 38px 18px 24px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #292929,
+      #111
+    );
+
+  border-radius: 10px;
+
+  border: 1px solid #444;
+
+  transition:
+    opacity 0.2s ease;
+}
+
+
+.game-holes {
+  display: grid;
+
+  grid-template-columns:
+    repeat(5, 1fr);
+
+  gap: 10px;
+}
+
+
+.game-hole {
+  aspect-ratio: 1;
+
+  border-radius: 50%;
+
+  border:
+    3px solid #555;
+
+  background:
+    radial-gradient(
+      circle,
+      #050505 45%,
+      #111 70%,
+      #222
+    );
+
+  cursor: pointer;
+
+  position: relative;
+
+  transition:
+    transform 0.1s,
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+
+.game-led {
+  position: absolute;
+
+  width: 25%;
+  aspect-ratio: 1;
+
+  top: 50%;
+  left: 50%;
+
+  transform:
+    translate(-50%, -50%);
+
+  border-radius: 50%;
+
+  background: #222;
+}
+
+
+.game-hole.cue {
+  border-color:
+    #ffd84d;
+
+  box-shadow:
+    0 0 8px
+      #ffd84d,
+
+    0 0 22px
+      rgba(
+        255,
+        216,
+        77,
+        0.65
+      );
+}
+
+
+.game-hole.cue
+.game-led {
+  background:
+    #fff4a3;
+
+  box-shadow:
+    0 0 10px
+      #ffd84d;
+}
+
+
+.game-hole.poked {
+  transform:
+    scale(0.9);
+}
+
+
+.game-tray {
+  display: block;
+
+  margin:
+    38px auto 0;
+
+  width: 45%;
+
+  padding: 14px;
+
+  background: #090909;
+
+  color: #777;
+
+  border:
+    2px solid #555;
+
+  border-radius: 6px;
+
+  cursor: pointer;
+
+  letter-spacing:
+    0.12em;
+}
+
+
+.game-tray.reward {
+  border-color:
+    #ffd84d;
+
+  color:
+    #ffd84d;
+
+  box-shadow:
+    0 0 16px
+      rgba(
+        255,
+        216,
+        77,
+        0.5
+      );
+}
+
+
+.mini-chamber.timeout {
+  opacity: 0.28;
+}
+
+
+.game-status {
+  min-height: 48px;
+
+  margin-top: 16px;
+
+  font-size:
+    0.9rem;
+
+  font-weight: 600;
+}
+
+
+.game-status.good {
+  color: #496f65;
+}
+
+
+.game-status.bad {
+  color: #8b0029;
+}
+
+
+/* trial raster */
+
+.trial-progress {
+  display: flex;
+
+  gap: 8px;
+
+  margin-top: 10px;
+}
+
+
+.trial-progress span {
+  width: 8px;
+  height: 24px;
+
+  border-radius: 3px;
+
+  background: #ddd;
+}
+
+
+.trial-progress
+span.current {
+  background: #888;
+}
+
+
+.trial-progress
+span.correct {
+  background: #496f65;
+}
+
+
+.trial-progress
+span.premature {
+  background: #8b0029;
+}
+
+
+.trial-progress
+span.incorrect {
+  background: #555;
+}
+
+
+.trial-progress
+span.omission {
+  background: #bbb;
+}
+
+
+/* results */
+
+.result-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 10px;
+
+  margin:
+    26px 0;
+}
+
+
+.result-grid div {
+  padding: 16px 8px;
+
+  text-align: center;
+
+  border:
+    1px solid
+    rgba(
+      0,
+      0,
+      0,
+      0.15
+    );
+
+  border-radius: 7px;
+}
+
+
+.result-grid strong {
+  display: block;
+
+  font-family:
+    Georgia,
+    serif;
+
+  font-size: 1.7rem;
+}
+
+
+.result-grid span {
+  display: block;
+
+  margin-top: 6px;
+
+  font-size: 0.65rem;
+
+  letter-spacing:
+    0.1em;
+
+  opacity: 0.6;
+}
+
+
+.result-note {
+  padding-left: 14px;
+
+  border-left:
+    3px solid #8b0029;
+}
