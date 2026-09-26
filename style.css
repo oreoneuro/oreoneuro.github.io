@@ -332,5 +332,173 @@ body {
   .reward-port {
     margin-top: 45px;
   }
+/* panel section label */
 
+.panel-kicker {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  opacity: 0.55;
+  margin-bottom: 12px;
+}
+
+
+/* CTA button */
+
+.panel-button {
+  margin-top: 20px;
+  padding: 14px 20px;
+
+  border: none;
+  border-radius: 5px;
+
+  background: #8b0029;
+  color: white;
+
+  font-size: 0.9rem;
+  cursor: pointer;
+
+  transition: transform 0.2s ease,
+              box-shadow 0.2s ease;
+}
+
+.panel-button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.18);
+}
+
+
+/* three research axes */
+
+.mini-grid {
+  display: grid;
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.mini-grid > div {
+  padding: 16px;
+
+  border-left: 3px solid #8b0029;
+
+  background: rgba(0, 0, 0, 0.035);
+}
+
+.mini-grid strong {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.05rem;
+}
+
+.mini-grid p {
+  margin-top: 6px;
+  margin-bottom: 0;
+  font-size: 0.9rem;
+}
+
+
+/* project cards */
+
+.project-card {
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.project-card h3 {
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: 1.25rem;
+  font-weight: 400;
+
+  margin-bottom: 8px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+
+  margin-top: 12px;
+}
+
+.tags span {
+  padding: 5px 8px;
+
+  border-radius: 20px;
+
+  background: rgba(139, 0, 41, 0.08);
+
+  font-size: 0.72rem;
+}
+
+
+/* big question */
+
+.big-question {
+  margin: 28px 0;
+
+  padding-left: 18px;
+
+  border-left: 4px solid #8b0029;
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: 1.35rem;
+  line-height: 1.45;
+}
+
+
+/* links */
+
+.link-stack {
+  display: grid;
+  gap: 10px;
+
+  margin-top: 25px;
+}
+
+.link-stack a {
+  display: block;
+
+  padding: 12px 0;
+
+  border-bottom: 1px solid rgba(0, 0, 0, 0.18);
+
+  text-decoration: none;
+
+  font-weight: 600;
+}
+
+.link-stack a:hover {
+  padding-left: 7px;
+}
+
+.poster-note {
+  margin-top: 25px;
+  font-size: 0.85rem;
+  opacity: 0.6;
+}
+
+
+/* leaderboard */
+
+.leaderboard-preview {
+  margin: 25px 0;
+}
+
+.leaderboard-preview div {
+  display: flex;
+  gap: 15px;
+
+  padding: 10px 0;
+
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.leaderboard-preview span {
+  width: 30px;
+  opacity: 0.5;
+}
+  
 }
