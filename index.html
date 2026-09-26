@@ -1,64 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
   <title>Soyeon Lee | Neuroscience</title>
+
   <link rel="stylesheet" href="style.css">
 </head>
 
+
 <body>
 
-  <main class="chamber">
+  <!-- =========================================
+       MAIN PORTFOLIO CHAMBER
+       ========================================= -->
 
-    <div class="top-text">
-      <p class="eyebrow">SOYEON LEE · NEUROSCIENCE</p>
+  <main class="portfolio-chamber">
+
+    <div class="hero-text">
+
+      <p class="eyebrow">
+        SOYEON LEE · NEUROSCIENCE
+      </p>
 
       <h1>
         Same environment.<br>
-        Different choices. Why?
+        Different choices.
+        <em>Why?</em>
       </h1>
 
       <p class="subtitle">
         Explore my research through the chamber.
       </p>
-    </div>
-
-    <div class="poke-wall">
-
-      <button class="poke" data-section="play" aria-label="Play">
-        <span></span>
-      </button>
-
-      <button class="poke" data-section="question" aria-label="Research question">
-        <span></span>
-      </button>
-
-      <button class="poke" data-section="research" aria-label="Research">
-        <span></span>
-      </button>
-
-      <button class="poke" data-section="next" aria-label="Next questions">
-        <span></span>
-      </button>
-
-      <button class="poke" data-section="connect" aria-label="Connect">
-        <span></span>
-      </button>
 
     </div>
 
-    <div class="labels">
+
+    <div class="portfolio-wall">
+
+      <button
+        class="portfolio-poke"
+        data-section="play"
+        aria-label="Play"
+      >
+        <span></span>
+      </button>
+
+
+      <button
+        class="portfolio-poke"
+        data-section="question"
+        aria-label="Question"
+      >
+        <span></span>
+      </button>
+
+
+      <button
+        class="portfolio-poke"
+        data-section="research"
+        aria-label="Research"
+      >
+        <span></span>
+      </button>
+
+
+      <button
+        class="portfolio-poke"
+        data-section="next"
+        aria-label="Next"
+      >
+        <span></span>
+      </button>
+
+
+      <button
+        class="portfolio-poke"
+        data-section="connect"
+        aria-label="Connect"
+      >
+        <span></span>
+      </button>
+
+    </div>
+
+
+    <div class="portfolio-labels">
+
       <span>PLAY</span>
       <span>QUESTION</span>
       <span>RESEARCH</span>
       <span>NEXT</span>
       <span>CONNECT</span>
+
     </div>
 
-    <button class="reward-port" id="rewardPort">
+
+    <button
+      class="community-port"
+      id="communityPort"
+    >
       COMMUNITY
     </button>
+
 
     <p class="hint">
       Choose a nose poke
@@ -66,9 +116,22 @@
 
   </main>
 
-  <section class="info-panel" id="infoPanel">
 
-    <button class="close-button" id="closeButton">
+
+  <!-- =========================================
+       SIDE INFORMATION PANEL
+       ========================================= -->
+
+  <section
+    class="info-panel"
+    id="infoPanel"
+  >
+
+    <button
+      class="close-button"
+      id="closeButton"
+      aria-label="Close"
+    >
       ×
     </button>
 
@@ -76,9 +139,304 @@
 
   </section>
 
-  <div class="overlay" id="overlay"></div>
+
+  <div
+    class="overlay"
+    id="overlay"
+  ></div>
+
+
+
+  <!-- =========================================
+       FULL SCREEN GAME
+       ========================================= -->
+
+  <section
+    class="game-modal"
+    id="gameModal"
+    aria-hidden="true"
+  >
+
+    <div class="game-shell">
+
+      <button
+        class="game-close"
+        id="gameClose"
+        aria-label="Close game"
+      >
+        ×
+      </button>
+
+
+      <header class="game-header">
+
+        <p class="game-kicker">
+          5-CHOICE SERIAL REACTION TIME TASK
+        </p>
+
+        <h2>
+          Wait for the
+          <em>light.</em>
+        </h2>
+
+        <p>
+          A short human version of the task I use
+          to study action impulsivity in mice.
+        </p>
+
+      </header>
+
+
+
+      <!-- HOW TO PLAY -->
+
+      <ol class="howto">
+
+        <li>
+
+          <b>1</b>
+
+          <strong>
+            Tap the tray
+          </strong>
+
+          <span>
+            starts a trial
+          </span>
+
+        </li>
+
+
+        <li>
+
+          <b>2</b>
+
+          <strong>
+            Wait
+          </strong>
+
+          <span>
+            don't touch during the delay
+          </span>
+
+        </li>
+
+
+        <li>
+
+          <b>3</b>
+
+          <strong>
+            Tap the glow
+          </strong>
+
+          <span>
+            as fast as you can
+          </span>
+
+        </li>
+
+      </ol>
+
+
+
+      <!-- 5-CSRTT CHAMBER -->
+
+      <div
+        class="game-chamber"
+        id="gChamber"
+      >
+
+        <div class="houselight"></div>
+
+        <div class="chamber-tag">
+          HOUSELIGHT
+        </div>
+
+
+        <div
+          class="game-wall"
+          id="gWall"
+        ></div>
+
+
+        <button
+          class="magazine ready"
+          id="gMag"
+          type="button"
+        >
+
+          <span class="maglight"></span>
+
+          <span class="pellet"></span>
+
+          <span class="maglabel">
+            FOOD TRAY
+          </span>
+
+        </button>
+
+
+        <div class="veil">
+
+          <span>
+            TIMEOUT
+          </span>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- STATUS -->
+
+      <div class="game-readout">
+
+        <p
+          class="game-status"
+          id="gStatus"
+        >
+          Tap the food tray to start trial 1.
+        </p>
+
+
+        <div class="raster">
+
+          <div
+            class="ticks"
+            id="gTicks"
+          ></div>
+
+          <small>
+            TRIAL RASTER
+          </small>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="game-legend">
+
+        <span>
+          <i class="legend-correct"></i>
+          correct
+        </span>
+
+        <span>
+          <i class="legend-premature"></i>
+          premature
+        </span>
+
+        <span>
+          <i class="legend-incorrect"></i>
+          wrong hole
+        </span>
+
+        <span>
+          <i class="legend-omission"></i>
+          missed
+        </span>
+
+      </div>
+
+
+
+      <!-- RESULT -->
+
+      <section
+        class="game-results"
+        id="gameResults"
+        hidden
+      >
+
+        <p class="panel-kicker">
+          YOUR RESULT
+        </p>
+
+        <h3>
+          Subject complete.
+        </h3>
+
+
+        <div class="result-grid">
+
+          <div>
+
+            <strong id="resultPremature">
+              0
+            </strong>
+
+            <span>
+              PREMATURE
+            </span>
+
+          </div>
+
+
+          <div>
+
+            <strong id="resultCorrect">
+              0/5
+            </strong>
+
+            <span>
+              CORRECT
+            </span>
+
+          </div>
+
+
+          <div>
+
+            <strong id="resultRT">
+              —
+            </strong>
+
+            <span>
+              MEAN RT
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <p class="result-copy" id="resultCopy">
+        </p>
+
+
+        <div class="result-actions">
+
+          <button
+            class="button-primary"
+            id="playAgain"
+          >
+            Play again
+          </button>
+
+
+          <button
+            class="button-secondary"
+            id="seeCommunity"
+          >
+            Community
+          </button>
+
+        </div>
+
+      </section>
+
+    </div>
+
+  </section>
+
+
 
   <script src="script.js"></script>
 
 </body>
+
 </html>
