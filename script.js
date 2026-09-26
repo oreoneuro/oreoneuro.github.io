@@ -382,7 +382,9 @@ question: `
     Find me at Poster [session / board].
   </p>
 
-`,
+`
+   
+};
 
 
 /* =========================================
@@ -773,7 +775,6 @@ gameClose.addEventListener(
   "click",
   closeGame
 );
-
 const rigModal =
   document.getElementById(
     "rigModal"
@@ -785,6 +786,8 @@ const rigClose =
   );
 
 function openRigGallery() {
+
+  if (!rigModal) return;
 
   rigModal.classList.add(
     "active"
@@ -802,6 +805,8 @@ function openRigGallery() {
 
 function closeRigGallery() {
 
+  if (!rigModal) return;
+
   rigModal.classList.remove(
     "active"
   );
@@ -814,6 +819,7 @@ function closeRigGallery() {
   document.body.style.overflow =
     "";
 }
+
 
 panelContent.addEventListener(
   "click",
@@ -831,22 +837,15 @@ panelContent.addEventListener(
   }
 );
 
-rigClose.addEventListener(
-  "click",
-  closeRigGallery
-);
 
-if (
-  rigModal.classList.contains(
-    "active"
-  )
-) {
+if (rigClose) {
 
-  closeRigGallery();
+  rigClose.addEventListener(
+    "click",
+    closeRigGallery
+  );
 
-  return;
 }
-
 
 /* =========================================
    STATUS
@@ -1765,9 +1764,7 @@ document
    ========================================= */
 
 document.addEventListener(
-
   "keydown",
-
   event => {
 
     if (
@@ -1776,11 +1773,21 @@ document.addEventListener(
     ) {
 
       if (
-        gameModal
-          .classList
-          .contains(
-            "active"
-          )
+        rigModal &&
+        rigModal.classList.contains(
+          "active"
+        )
+      ) {
+
+        closeRigGallery();
+
+        return;
+      }
+
+      if (
+        gameModal.classList.contains(
+          "active"
+        )
       ) {
 
         closeGame();
@@ -1794,11 +1801,4 @@ document.addEventListener(
     }
 
   }
-
 );
-
-
-
-/* initial state */
-
-resetTask();
