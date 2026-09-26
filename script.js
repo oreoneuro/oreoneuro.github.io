@@ -243,15 +243,629 @@ function startGame() {
   panelContent.innerHTML = `
     <p class="panel-kicker">PLAY</p>
 
-    <h2>Game prototype coming next.</h2>
+    <h2>Wait for the light.</h2>
 
-    <p>
-      This button will open the interactive 5-CSRTT-inspired task.
+    <p class="game-instruction">
+      Start from the food tray. Wait. Then tap the glowing hole.
     </p>
 
-    <p>
-      Next step: stimulus timing, premature responses,
-      reaction time scoring, and leaderboard submission.
+    <div class="mini-chamber" id="gameChamber">
+
+      <div class="game-holes">
+
+        <button class="game-hole" data-hole="1">
+          <span class="game-led"></span>
+        </button>
+
+        <button class="game-hole" data-hole="2">
+          <span class="game-led"></span>
+        </button>
+
+        <button class="game-hole" data-hole="3">
+          <span class="game-led"></span>
+        </button>
+
+        <button class="game-hole" data-hole="4">
+          <span class="game-led"></span>
+        </button>
+
+        <button class="game-hole" data-hole="5">
+          <span class="game-led"></span>
+        </button>
+
+      </div>
+
+      <button class="game-tray" id="gameTray">
+        FOOD TRAY
+      </button>
+
+    </div>
+
+    <p class="game-status" id="gameStatus">
+      Tap the food tray to start trial 1.
     </p>
+
+    <div class="trial-progress" id="trialProgress"></div>
+  `;
+
+  initGame();
+}
+
+const GAME_CONFIG = {
+  trials: 5,
+
+  itiOptions: [
+    1500,
+    2000,
+    2500,
+    3000,
+    3500,
+    4000
+  ],
+
+  stimulusDuration: 1000,
+
+  limitedHold: 2000,
+
+  timeout: 2000
+};
+
+
+let gameState = null;
+let gameTimers = [];
+
+
+function clearGameTimers() {
+
+  gameTimers.forEach(clearTimeout);
+
+  gameTimers = [];
+}
+
+
+function gameLater(fn, ms) {
+
+  const timer = setTimeout(fn, ms);
+
+  gameTimers.push(timer);
+}
+
+
+function initGame() {
+
+  clearGameTimers();
+
+  gameState = {
+
+    phase: "await",
+
+    trial: 0,
+
+    trials: [],
+
+    cue: null,
+
+    cueTime: null
+
+  };
+
+
+  document
+    .querySelectorAll(".game-hole")
+    .forEach((hole) => {
+
+      hole.addEventListener("click", () => {
+
+        handleHole(
+          Number(hole.dataset.hole)
+        );
+
+      });
+
+    });
+
+
+  document
+    .getElementById("gameTray")
+    .addEventListener(
+      "click",
+      handleTray
+    );
+
+
+  updateTrialProgress();
+}
+
+function handleTray() {
+
+  if (
+    gameState.phase !== "await" &&
+    gameState.phase !== "reward"
+  ) {
+    return;
+  }
+
+
+  if (
+    gameState.trial >=
+    GAME_CONFIG.trials
+  ) {
+
+    finishGame();
+
+    return;
+  }
+
+
+  gameState.trial++;
+
+  gameState.phase = "iti";
+
+
+  setGameStatus(
+    "Wait for the light…"
+  );
+
+
+  updateTrialProgress();
+
+
+  const iti =
+    GAME_CONFIG.itiOptions[
+      Math.floor(
+        Math.random() *
+        GAME_CONFIG.itiOptions.length
+      )
+    ];
+
+
+  gameLater(() => {
+
+    showCue();
+
+  }, iti);
+}
+
+function showCue() {
+
+  gameState.phase = "cue";
+
+  gameState.cue =
+    Math.floor(Math.random() * 5) + 1;
+
+  gameState.cueTime =
+    performance.now();
+
+
+  const hole =
+    document.querySelector(
+      `.game-hole[data-hole="${gameState.cue}"]`
+    );
+
+
+  hole.classList.add("cue");
+
+
+  setGameStatus(
+    "Now!"
+  );
+
+
+  gameLater(() => {
+
+    hole.classList.remove("cue");
+
+  }, GAME_CONFIG.stimulusDuration);
+
+
+  gameLater(() => {
+
+    if (gameState.phase === "cue") {
+
+      recordTrial(
+        "omission"
+      );
+
+      startTimeout(
+        "Missed it."
+      );
+
+    }
+
+  }, GAME_CONFIG.limitedHold);
+}
+
+function handleHole(holeNumber) {
+
+  const hole =
+    document.querySelector(
+      `.game-hole[data-hole="${holeNumber}"]`
+    );
+
+
+  hole.classList.add("poked");
+
+  setTimeout(() => {
+
+    hole.classList.remove("poked");
+
+  }, 100);
+
+
+  /* Premature response */
+
+  if (
+    gameState.phase === "iti"
+  ) {
+
+    clearGameTimers();
+
+    recordTrial(
+      "premature"
+    );
+
+    startTimeout(
+      "Too early!"
+    );
+
+    return;
+  }
+
+
+  /* Response after cue */
+
+  if (
+    gameState.phase === "cue"
+  ) {
+
+    clearGameTimers();
+
+
+    document
+      .querySelectorAll(".game-hole")
+      .forEach((h) =>
+        h.classList.remove("cue")
+      );
+
+
+    const reactionTime =
+      performance.now() -
+      gameState.cueTime;
+
+
+    if (
+      holeNumber ===
+      gameState.cue
+    ) {
+
+      recordTrial(
+        "correct",
+        reactionTime
+      );
+
+
+      gameState.phase =
+        "reward";
+
+
+      setGameStatus(
+        `Correct — ${Math.round(
+          reactionTime
+        )} ms. Collect the reward.`,
+        "good"
+      );
+
+
+      document
+        .getElementById("gameTray")
+        .classList.add("reward");
+
+
+    } else {
+
+      recordTrial(
+        "incorrect",
+        reactionTime
+      );
+
+
+      startTimeout(
+        "Wrong hole."
+      );
+
+    }
+
+  }
+
+}
+
+function recordTrial(
+  outcome,
+  reactionTime = null
+) {
+
+  gameState.trials.push({
+
+    outcome,
+
+    reactionTime
+
+  });
+
+
+  updateTrialProgress();
+}
+
+
+function startTimeout(message) {
+
+  gameState.phase =
+    "timeout";
+
+
+  document
+    .getElementById(
+      "gameChamber"
+    )
+    .classList.add("timeout");
+
+
+  setGameStatus(
+    message + " Lights off.",
+    "bad"
+  );
+
+
+  gameLater(() => {
+
+    document
+      .getElementById(
+        "gameChamber"
+      )
+      .classList.remove(
+        "timeout"
+      );
+
+
+    if (
+      gameState.trial >=
+      GAME_CONFIG.trials
+    ) {
+
+      finishGame();
+
+      return;
+    }
+
+
+    gameState.phase =
+      "await";
+
+
+    setGameStatus(
+      `Tap the food tray to start trial ${
+        gameState.trial + 1
+      }.`
+    );
+
+
+  }, GAME_CONFIG.timeout);
+}
+
+document
+  .getElementById("gameTray")
+  .classList.remove("reward");
+
+function setGameStatus(
+  message,
+  type = ""
+) {
+
+  const status =
+    document.getElementById(
+      "gameStatus"
+    );
+
+
+  status.textContent =
+    message;
+
+
+  status.className =
+    "game-status " +
+    type;
+}
+
+
+function updateTrialProgress() {
+
+  const container =
+    document.getElementById(
+      "trialProgress"
+    );
+
+
+  if (!container) return;
+
+
+  container.innerHTML = "";
+
+
+  for (
+    let i = 0;
+    i < GAME_CONFIG.trials;
+    i++
+  ) {
+
+    const dot =
+      document.createElement(
+        "span"
+      );
+
+
+    if (
+      gameState.trials[i]
+    ) {
+
+      dot.classList.add(
+        gameState.trials[i]
+          .outcome
+      );
+
+    } else if (
+      i === gameState.trial - 1
+    ) {
+
+      dot.classList.add(
+        "current"
+      );
+
+    }
+
+
+    container.appendChild(
+      dot
+    );
+  }
+}
+
+function finishGame() {
+
+  clearGameTimers();
+
+  gameState.phase =
+    "done";
+
+
+  const premature =
+    gameState.trials.filter(
+      t =>
+        t.outcome ===
+        "premature"
+    ).length;
+
+
+  const correct =
+    gameState.trials.filter(
+      t =>
+        t.outcome ===
+        "correct"
+    );
+
+
+  const incorrect =
+    gameState.trials.filter(
+      t =>
+        t.outcome ===
+        "incorrect"
+    ).length;
+
+
+  const omissions =
+    gameState.trials.filter(
+      t =>
+        t.outcome ===
+        "omission"
+    ).length;
+
+
+  const meanRT =
+    correct.length
+      ? Math.round(
+          correct.reduce(
+            (sum, t) =>
+              sum +
+              t.reactionTime,
+            0
+          ) /
+          correct.length
+        )
+      : null;
+
+
+  showGameResult({
+
+    premature,
+
+    correct:
+      correct.length,
+
+    incorrect,
+
+    omissions,
+
+    reactionTime:
+      meanRT
+
+  });
+}
+
+function showGameResult(result) {
+
+  panelContent.innerHTML = `
+
+    <p class="panel-kicker">
+      YOUR RESULT
+    </p>
+
+    <h2>
+      Subject complete.
+    </h2>
+
+    <div class="result-grid">
+
+      <div>
+        <strong>
+          ${result.premature}
+        </strong>
+
+        <span>
+          PREMATURE
+        </span>
+      </div>
+
+
+      <div>
+        <strong>
+          ${result.correct}/5
+        </strong>
+
+        <span>
+          CORRECT
+        </span>
+      </div>
+
+
+      <div>
+        <strong>
+          ${
+            result.reactionTime
+            ? result.reactionTime +
+              " ms"
+            : "—"
+          }
+        </strong>
+
+        <span>
+          MEAN RT
+        </span>
+      </div>
+
+    </div>
+
+
+    <p class="result-note">
+      Your rank among SfN players
+      will appear here.
+    </p>
+
+
+    <button
+      class="panel-button"
+      onclick="startGame()"
+    >
+      Play again
+    </button>
+
   `;
 }
