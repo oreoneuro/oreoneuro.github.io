@@ -427,6 +427,13 @@ button {
 }
 
 @media (max-width: 700px) {
+
+.info-panel {
+  width: 100vw;
+  max-width: none;
+  padding: 64px 24px 40px;
+}
+   
   .portfolio-labels {
     font-size: 0.62rem;
     color: rgba(255, 255, 255, 0.82);
