@@ -140,6 +140,13 @@ button {
 
 /* hero */
 
+.hero-meta {
+  margin-top: 12px;
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.62);
+}
+
 .hero-text {
 
   text-align: center;
