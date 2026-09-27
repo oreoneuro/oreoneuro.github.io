@@ -80,6 +80,23 @@ button {
    MAIN PORTFOLIO CHAMBER
    ========================================= */
 
+.portfolio-poke.cue-default {
+  border-color: var(--yellow);
+
+  box-shadow:
+    0 0 7px var(--yellow),
+    0 0 18px rgba(255, 216, 77, 0.72),
+    0 0 34px rgba(255, 216, 77, 0.35);
+}
+
+.portfolio-poke.cue-default span {
+  background: var(--yellow-soft);
+
+  box-shadow:
+    0 0 10px var(--yellow),
+    0 0 18px rgba(255, 216, 77, 0.5);
+}
+
 .portfolio-chamber {
 
   min-height: 100vh;
@@ -385,47 +402,36 @@ button {
 /* menu labels */
 
 .portfolio-labels {
-
-  width:
-    min(
-      900px,
-      92vw
-    );
+  width: min(900px, 92vw);
 
   display: grid;
-
-  grid-template-columns:
-    repeat(
-      5,
-      1fr
-    );
+  grid-template-columns: repeat(5, 1fr);
 
   gap: 22px;
 
-  margin-top:
-    13px;
+  margin-top: 14px;
 
-  text-align:
-    center;
+  text-align: center;
 
-  font-family:
-    var(--mono);
+  font-family: var(--mono);
 
-  font-size:
-    0.67rem;
+  font-size: 0.78rem;
+  font-weight: 600;
 
-  letter-spacing:
-    0.08em;
+  letter-spacing: 0.08em;
 
-  opacity:
-    0.55;
+  color: rgba(255, 255, 255, 0.78);
 
   position: relative;
-
   z-index: 2;
 }
 
-
+@media (max-width: 700px) {
+  .portfolio-labels {
+    font-size: 0.62rem;
+    color: rgba(255, 255, 255, 0.82);
+  }
+}
 
 /* community reward port */
 
